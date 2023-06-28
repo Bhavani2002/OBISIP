@@ -1,0 +1,56 @@
+import java.util.*;
+class NumberGuessGame
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("....Welcome to the Number Guessing Game....");
+        System.out.println("Are you ready to start the game---->  (yes/no)?");
+        String Start = sc.next();
+        if(Start.equalsIgnoreCase("Yes"))
+        {
+            System.out.println("*** START THE GAME ***");
+            System.out.println("Guess the number between 1 and 100.");
+            System.out.println("In how many attempts you want to guess the number?");
+            int tries = sc.nextInt(); 
+            int score = tries*10;
+            System.out.println("Your intial score is "+score);
+            System.out.println("10 points will br reduced for every wrong guess.");
+            System.out.println("Best of Luck!!");
+            int answer = (int)Math.floor(Math.random()*100);
+            while(tries>0)
+            {
+                System.out.println("Guess the number:");
+                int n = sc.nextInt(); //n=input number 
+                if(n == answer)
+                {
+ System.out.println("Congratulations, you won the game.");
+                    System.out.println("Your score is "+score);
+                    return;
+                }
+                else
+                {
+                    score = score-10;
+                   
+                    if(tries!= 1){
+                        if(n > answer)
+                        System.out.println("The number is smaller than your guess.");
+                        else
+                        System.out.println("The number is greater than your guess.");
+                    System.out.println("Oops wrong guess! Try Again.");
+                    }
+                }
+                tries--;
+            }
+            System.out.println("Alas! You Lost the game.");
+            System.out.println("your score is "+score);
+            System.out.println("The number is "+answer);
+            
+        }
+        else
+        {
+            return;
+        }
+        
+    }
+}
