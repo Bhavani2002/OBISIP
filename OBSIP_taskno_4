@@ -1,0 +1,142 @@
+import java.util.*;
+public class OnlineExam
+{
+Scanner sc = new Scanner(System.in);
+HashMap<String,Integer> Details = new HashMap<>();
+    public void UserLogin() {
+		Details.put("Bhavani",1443);
+		System.out.println("\n<<<-WELCOME TO THE ONLINE EXAM PORTAL->>>");
+		String Uname;
+		System.out.println("Enter UserName:");
+		Uname = sc.next();
+		int PWD;
+		System.out.println("Enter Password: ");
+		PWD= sc.nextInt();
+		if(Details.containsKey(Uname)) {
+			if(Details.get(Uname)==PWD){
+				System.out.println("\n Welcome User\n");
+				Options_Menu();	}
+			else {
+				System.out.println("Please Enter Valid Password For: "+Uname);
+				UserLogin();    
+}
+        }
+		else{
+			System.out.println("Please Enter Valid User Name");
+}
+    
+	}
+	public void Options_Menu() {
+		int Choice;
+		System.out.println("---- User Menu---");
+		System.out.println("1.Update Profile \n2.Write Exam\n3.Exit ");
+		System.out.println("Enteryour Choice: ");
+		Choice = sc.nextInt();
+		switch(Choice) {
+		case 1:
+			Details=Update_Details();
+			Options_Menu();
+			break;
+		case 2:
+			Examination();
+			Options_Menu();
+			break;
+		case 3:
+            System.out.println("Thanks For Using the online Exam Portal!!");
+			System.exit(0);
+			break;
+		default:
+			System.out.println("Please Enter Number in User Menu Only");
+		}
+	}
+	public HashMap<String,Integer> Update_Details()
+	{
+		String update_name;
+		int update_pwd;//pwd=Password
+		System.out.println("updateDetails Profile");
+		System.out.println("Enter The Username: ");
+		update_name = sc.next();
+		if(Details.containsKey(update_name)) {
+		System.out.println("Enter New Password for your Account");
+		update_pwd = sc.nextInt();
+		Details.replace(update_name, update_pwd);
+        System.out.println("Your Details Successfully Updated....");
+		}
+		else {
+			System.out.println("Enter The Correct UserName");
+		}
+		return Details;
+	}
+public void Examination() {
+    Calendar cr = Calendar.getInstance();
+	long StartTime=System.currentTimeMillis();
+long EndTime=StartTime+30;
+	int AnsweredQueries=0;
+	int UserAnswer,MarksSecured;
+	System.out.println("Please Start Your Exam");
+	System.out.println("Examination Instructions ");
+	System.out.println("-->You Have To Answer 5 Questions in 30 Seconds");
+	System.out.println("-->Each Question carries 10 marks and -5 for wrong answer");
+	HashMap<String,ArrayList<String>> queries=new HashMap<String,ArrayList<String>>();
+	ArrayList<String> Ques1=new ArrayList<String>();
+    Ques1.add("Array.sort()");
+	Ques1.add("Collection.sort()");
+	Ques1.add("System.sort()");
+	Ques1.add("Arrays.sort()");
+	Ques1.add("4");
+	queries.put("How to sort an array?",Ques1);
+	ArrayList<String> Ques2=new ArrayList<String>();
+	Ques2.add("To terminate current iteration");
+	Ques2.add("To continue current iteration");
+	Ques2.add("To terminate main flow");
+	Ques2.add("To continue main flow");
+	Ques2.add("3");
+	queries.put(" What is the functionality of break statement?",Ques2);
+	ArrayList<String> Ques3=new ArrayList<String>();
+	Ques3.add("Java Virtual Machine");
+	Ques3.add("Java Virtual Mechanism");
+	Ques3.add("Java Virtual Management");
+	Ques3.add("Java Virtual Memory");
+	Ques3.add("1");
+	queries.put("JVM stands for?",Ques3);
+	ArrayList<String> Ques4=new ArrayList<String>();
+	Ques4.add("2");
+	Ques4.add("5");
+	Ques4.add("8");
+	Ques4.add("9");
+	Ques4.add("3");
+	queries.put("How many primitive datatypes are there in Java?",Ques4);
+    ArrayList<String> Ques5=new ArrayList<String>();
+	Ques5.add("Byte to int");
+	Ques5.add("Int to long");
+	Ques5.add("Long to int");
+	Ques5.add("Short to int");
+	Ques5.add("2");
+	queries.put("Automatic type conversion is possible in which of the possible cases?",Ques5);
+	int sno=0;
+    Set<String> set=queries.keySet(); 
+    ArrayList<String> al=new ArrayList<>(set);
+    int x=al.size();
+	while(System.currentTimeMillis()<EndTime || sno<x) {
+        String i=al.get(sno);
+		System.out.println("\n\nQ."+(sno+1)+") "+i);
+		System.out.println("(1) "+queries.get(i).get(0)+"\t"+"\n(2) "+queries.get(i).get(1)+"\t"+"\n(3) "+queries.get(i).get(2)+"\t"+"\n(4) "+queries.get(i).get(3)+" ");
+		System.out.println("\nEnter Option");
+		UserAnswer=sc.nextInt();
+		System.out.println("Your Answer is Submited..");
+		if(UserAnswer==Integer.parseInt(queries.get(i).get(4))) {
+			AnsweredQueries++;
+		}
+        sno++;
+	}
+	System.out.println("You have Completed the Exam");
+	MarksSecured=AnsweredQueries*10-((5-AnsweredQueries)*5); 
+	System.out.println("Your score is::"+" "+MarksSecured+"/50");	
+}
+
+public static void main (String args[])
+{
+	Main em =new Main();
+		em.UserLogin();
+}
+}
